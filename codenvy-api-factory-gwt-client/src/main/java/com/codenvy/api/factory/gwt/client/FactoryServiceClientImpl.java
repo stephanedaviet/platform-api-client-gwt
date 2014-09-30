@@ -52,6 +52,22 @@ public class FactoryServiceClientImpl implements FactoryServiceClient {
                            .send(callback);
     }
 
+    @Override
+    public void getFactory(@NotNull String raw, boolean encoded, boolean legacy, @NotNull AsyncRequestCallback<Factory> callback) {
+        StringBuilder url = new StringBuilder("/api/factory");
+
+        if (encoded) {
+            url.append("/").append(raw).append("?");
+        } else {
+            url.append("/nonencoded?").append(raw).append("&");
+        }
+
+        url.append("legacy=").append(legacy);
+
+        asyncRequestFactory.createGetRequest(url.toString()).header(HTTPHeader.ACCEPT, MimeType.APPLICATION_JSON)
+                           .send(callback);
+    }
+
     /** {@inheritDoc} */
     @Override
     public void acceptFactory(@NotNull Factory factory, @NotNull AsyncRequestCallback<Factory> callback) {

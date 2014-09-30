@@ -35,6 +35,8 @@ public interface FactoryServiceClient {
      */
     void getFactory(@NotNull String raw, boolean encoded, @NotNull AsyncRequestCallback<Factory> callback);
 
+    void getFactory(@NotNull String raw, boolean encoded, boolean legacy, @NotNull AsyncRequestCallback<Factory> callback);
+
     /**
      * Send valid JSON factory object to server side of IDE3 to accept it. Accepting means
      * <ul>
